@@ -4,7 +4,7 @@ body {
   background-color: #eee;
 }
 
-.form-signin {
+.form-signin, .form-inline{
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
@@ -16,7 +16,7 @@ body {
 .form-signin .checkbox {
   font-weight: normal;
 }
-.form-signin .form-control {
+.form-signin .form-control{
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
