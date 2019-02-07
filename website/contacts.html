@@ -5,6 +5,33 @@
     <link href="contacts.css" rel="stylesheet">
     <link href="signin.css" rel="stylesheet">
     <link href="../bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    
+    <script src="jquery-1.11.2.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $.ajax({
+          url: 'contactService.asmx/getContacts',
+          method: 'post',
+          dataType: 'json',
+          success: function(data) {
+           $('#myTableData').dataTable({
+            data: data
+            columns: [
+              {'data' : 'UserID'},
+              {'data' : 'FirstName'},
+              {'data' : 'LastName'},
+              {'data' : 'PhoneNumber'},
+              {'data' : 'Email'},
+              {'data' : 'ContactID'}
+            ]
+           }); 
+          }
+        });
+      });
+    </script>
+
 </head>
 <body onload="load()">
 <div id="container">
@@ -13,11 +40,11 @@
     <form class="form-inline" role="form">
       <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
       <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-    <button type="button" class="btn btn-primary mb-2">Submit</button>
+    <button type="button" onClick="doSearch()" class="btn btn-primary mb-2">Submit</button>
     </form>
   </div>
 </div>
-<!--
+
 <table class="table">
     <tr>
         <td><input type="text" id="First Name"  placeholder="First Name">
@@ -31,7 +58,8 @@
         <td>&nbsp;</td>
     </tr>
 </table>
--->
+
+
 <form class="form-signin">
 <div class="form-group">
   <label for = "Credentials">Credentials</label>
@@ -50,17 +78,18 @@
 <b>Searched stuff</b>
 <table class="table" id="myTableData"  border="1">
     <tr>
-        <td>ID</td>
+        <td>User ID</td>
         <td>First Name</td>
         <td>Last Name</td>
         <td>Phone Number</td>
-        <td>Email Address</td>
+        <td>Email</td>
+        <td>Contact ID</td>
     </tr>
 </table>
 &nbsp;<br/>
 </div>
 </div> <!--End containter-->
 </body>
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="data.js"></script>
 </html>
+
+
