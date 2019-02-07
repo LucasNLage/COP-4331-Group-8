@@ -40,3 +40,37 @@ function doLogin()
 
 }
 
+
+function switchLogin()
+{
+    // document.getElementById("loginBtn").style.visibility = "collapse"; 
+    removeElement("loginBtn");
+    // document.getElementById("createAcc").innerHTML = "Create account"
+    removeElement("firstTime");
+    document.getElementById("formHeader").innerHTML = "Create account";
+    
+    addElement("loginContainer", "button", "createAcc", "Create your account!");
+    document.getElementById("createAcc").className = "btn btn-lg btn-primary btn-block";
+    
+    document.getElementById("createAcc").addEventListener("click", function(){ createAccount() });
+}
+
+function createAccount()
+{
+    alert("Account created");
+}
+
+function addElement(parentId, elementTag, elementId, html) {
+    // Adds an element to the document
+    var p = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+function removeElement(elementId)
+{
+    // Removes an element from the document
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
