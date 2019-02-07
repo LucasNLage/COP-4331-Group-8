@@ -1,4 +1,7 @@
 
+button:focus {
+    outline: 0;
+}
 .form-inline {
   padding: 10px;
   display:block !important;
