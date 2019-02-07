@@ -4,20 +4,11 @@
 <head>
 
     <title>Contacts</title>
-<<<<<<< HEAD
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+	
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
 	<link href = "signin.css" rel="stylesheet">
 	<link href = "contacts.css" rel="stylesheet">
-	
-=======
-    <link href="contacts.css" rel="stylesheet">
-    <link href="signin.css" rel="stylesheet">
-    <link href="../bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="data.js"></script>
 
-    <script src="jquery-1.11.2.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
         $.ajax({
@@ -41,7 +32,6 @@
       });
     </script>
 
->>>>>>> b25cc28119d9f810763a5df78e54965d7c7a8058
 </head>
 
 
@@ -131,92 +121,31 @@
     </div>
 </nav>
 
-
-	
-
-	<div id="container">
-	
-		<span id="loginResult"></span>
-
-		<div class="input-group-prepend">
-
-			<div id="search">
-  
-				<form class="form-inline" role="form">
-					<label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
-					<input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-				
-					<button type="button" class="btn btn-primary mb-2">Submit</button>
-				</form>
-			</div>
-		</div>
-
-		<form class="form-signin">
-
-			<div class="form-group">
-		
-				<label for = "Credentials">Add Contact:</label>
-				<input type="text" class="form-control" id="First Name" placeholder="First Name" name="First Name">
-			</div>
-	
-			<div class="form-group">
-				<input type="text" class="form-control" id="Last Name" placeholder="Last Name" name="Last Name">
-			</div>
-	
-			<div class="form-group">
-				<input type="text" class="form-control" id="Email Address" placeholder="Email Address" name="Email Address">
-			</div>
-
-			<button type="submit" class="btn btn-primary" id="add" value="Add" onclick="doLogin()">Submit</button>
-		</form>
-	
-		<div id="mydata">
-			<b>Searched Contacts</b>
-			<table class="table" id="myTableData"  border="1">
-				<tr>
-					<td>ID</td>
-					<td>First Name</td>
-					<td>Last Name</td>
-					<td>Phone Number</td>
-					<td>Email Address</td>
-				</tr>
-			</table>
-		
-=======
 <div id="container">
 <div class="input-group-prepend">
   <div id="search">
     <form class="form-inline" role="form">
       <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
       <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-    <button type="button" onClick="doSearch()" class="btn btn-primary mb-2">Submit</button>
+    <button type="button" class="btn btn-primary mb-2">Submit</button>
     </form>
   </div>
 </div>
-
+<!--
 <table class="table">
-  <tbody>
-  <tr>
-    <td>
-      <input type="text" class="form-control" size="16" id="First Name"  placeholder="First Name">
-    </td>
-    <td>
-      <input type="text" class="form-control" size="16" id="Last Name"  placeholder="Last Name">
-    </td>
-    <td>
-      <input type="text" class="form-control" id="Phone Number"  size="16" placeholder="Phone Number">
-    </td>
-    <td>
-      <input type="text" class="form-control" id="Email Address" size="16" placeholder="Email Address">
-    </td>
-    <td>
-      <input type="button" class="btn btn-primary" id="add" value="Add" onclick="Javascript:addRow()">
-    </td>
-  </tr>
-</tbody>
+    <tr>
+        <td><input type="text" id="First Name"  placeholder="First Name">
+        <input type="text" id="Last Name"  placeholder="Last Name">
+        <input type="text" id="Phone Number"  placeholder="Phone Number">
+        <input type="text" id="Email Address"  placeholder="Email Address">
+        <input type="button" id="add" value="Add" onclick="Javascript:addRow()"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
 </table>
-
-
+-->
 <form class="form-signin">
 <div class="form-group">
   <label for = "Credentials">Credentials</label>
@@ -235,29 +164,26 @@
 <b>Searched stuff</b>
 <table class="table" id="myTableData"  border="1">
     <tr>
-        <td>User ID</td>
+        <td>ID</td>
         <td>First Name</td>
         <td>Last Name</td>
         <td>Phone Number</td>
-        <td>Email</td>
-        <td>Contact ID</td>
+        <td>Email Address</td>
     </tr>
 </table>
->>>>>>> b25cc28119d9f810763a5df78e54965d7c7a8058
 &nbsp;<br/>
-		</div>
-	</div> <!--End containter-->
+</div>
+</div> <!--End containter-->
 
 </body>
-<<<<<<< HEAD
 
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="data.js"></script>
+<script src="jquery-1.11.2.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"</script>
-<script type="text/javascript" src="app.js"></script>
 <script src='script.js'></script>
 
 
-=======
->>>>>>> b25cc28119d9f810763a5df78e54965d7c7a8058
 </html>
