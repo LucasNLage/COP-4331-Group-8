@@ -9,10 +9,11 @@
     <script type="text/javascript" src="data.js"></script>
     
     <script src="jquery-1.11.2.js"></script>
+    
     <script type="text/javascript">
       $(document).ready(function () {
         $.ajax({
-          url: 'contactService.asmx/getContacts',
+          url: 'https://managebandageapi.azurewebsites.net/GetContacts',
           method: 'post',
           dataType: 'json',
           success: function(data) {
@@ -31,7 +32,7 @@
         });
       });
     </script>
-
+   
 </head>
 <body onload="load()">
 <div id="container">
@@ -40,7 +41,7 @@
     <form class="form-inline" role="form">
       <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
       <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-    <button type="button" onClick="doSearch()" class="btn btn-primary mb-2">Submit</button>
+    <button type="button" onclick="fetchContacts()" class="btn btn-primary mb-2">Submit</button>
     </form>
   </div>
 </div>
