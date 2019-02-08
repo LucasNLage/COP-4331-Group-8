@@ -6,7 +6,7 @@ function doLogin()
     var password = document.getElementById("inputPassword").value; //  .value gets input from password textbox
 
     document.getElementById("loginResult").innerHTML = "";
-
+// 
     var jsonPayload = '{"UserID" : "' + login + '", "Password" : "' + password + '"}';
     var url = urlBase + '/UserLogin';
 
@@ -17,13 +17,14 @@ function doLogin()
     try
     {
         xhr.send(jsonPayload); // sends to server, used for POST requests
+        var jsonObject = JSON.parse(xhr.responseText);
 
-         if( xhr.responseText !== "true")
+         if(jsonObject == null)
          {
              document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
              alert("login failed");
              return;
-         } else if(xhr.responseText == "true") {
+         } else { //if(xhr.responseText == "true") {
             alert("login successful");
             window.location.href = "https://managebandage.azurewebsites.net/contacts.html"
         }
