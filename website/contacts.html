@@ -16,7 +16,8 @@
     <form class="form-inline" role="form">
       <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
       <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-    <button type="button" class="btn btn-primary mb-2">Submit</button>
+    <button type="button" class="btn btn-primary mb-2" onClick="searchContacts()">Submit</button>
+    <select id="contactList"></select>
     </form>
   </div>
 </div>
@@ -54,20 +55,26 @@
 <!--<button type="submit" class="btn btn-primary" id="add" value="Add" onclick="Javascript:addRow()">Submit</button>-->
 <button type="button" class="btn btn-primary" id="add" value="Add" onclick="addContact()">Submit</button>
 </form>
-<div id="mydata">
-<b>Searched stuff</b>
-<table class="table" id="myTableData"  border="1">
+<div id="contacts">
+<b>Your contacts:</b>
+<table class="table" id="contactsData"  border="1">
+  <thead>
     <tr>
-        <td>ID</td>
-        <td>First Name</td>
-        <td>Last Name</td>
-        <td>Phone Number</td>
-        <td>Email Address</td>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Email Address</th>
+        <th>Delete?</th>
     </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
 </table>
 &nbsp;<br/>
 </div>
-<button type="button" class="btn btn-primary" id="add" value="Add" onclick="getContacts()">View Contacts</button>
+<button type="button" class="btn btn-primary" id="View" value="View" onclick="getContacts()">View Contacts</button>
 <div id="div1">
 </div>
 </div> <!--End containter-->

@@ -32,7 +32,7 @@ function doLogin()
          } else {
             window.name = login;
           //  alert(window.name);
-            window.location.href = "file:///C:/Users/Selena/Desktop/manage_bandage/COP-4331-Group-8/website/contacts.html";
+            window.location.href = "file:///C:/Users/Selena/Desktop/COP-4331-Group-8/website/contacts.html";
         }
 
     //     document.getElementById("inputEmail").value = ""; // resets text boxes
@@ -59,7 +59,6 @@ function addContact()
    var url = urlBase + '/SaveContact';
    var xhr = new XMLHttpRequest();
    xhr.open("POST", url, false);
-   alert("good");
   xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
   try
   {
@@ -95,7 +94,7 @@ function createUser() {
         {
           alert("Account created");
           window.name = newUsername;
-          window.location.href = "file:///C:/Users/Selena/Desktop/manage_bandage/COP-4331-Group-8/website/contacts.html";
+          window.location.href = "file:///C:/Users/Selena/Desktop/COP-4331-Group-8/website/contacts.html";
         }
       };
       xhr.send(jsonPayload);
@@ -106,6 +105,7 @@ function createUser() {
 }
 
 function getContacts() {
+  var toBeDeleted ="";
   var jsonPayload = '{"UserID" : "' + window.name + '", "Password" : "' + "" + '"}';
   var url = urlBase + '/GetContacts';
   var xhr = new XMLHttpRequest();
@@ -128,19 +128,70 @@ function getContacts() {
   }
 
 
-  var tbl=$("<table/>").attr("id","mytable");
-  $("#div1").append(tbl);
-  for(var i=0;i<jsonObject.length;i++)
+  var html = '';
+  for(var i in jsonObject)
   {
-      var tr="<tr>";
-      var td1="<td>"+jsonObject[i]["FirstName"]+"</td>";
-      var td2="<td>"+jsonObject[i]["LastName"]+"</td>";
-      var td3="<td>"+jsonObject[i]["PhoneNumber"]+"</td>";
-      var td4="<td>"+jsonObject[i]["Email"]+"</td></tr>";
-
-     $("#mytable").append(tr+td1+td2+td3+td4);
+    html += '<tr id="'+i+'">';
+    html += '<td>'+jsonObject[i]["ContactID"]+'</td>';
+    html += '<td>'+jsonObject[i]["FirstName"]+'</td>';
+    html += '<td>'+jsonObject[i]["LastName"]+'</td>';
+    html += '<td>'+jsonObject[i]["PhoneNumber"]+'</td>';
+    html += '<td>'+jsonObject[i]["Email"]+'</td>';
+    html += '<td><button class="btn btn-primary" onClick="deleteContact()">Delete</button></td></tr>';
+    html += '</tr>';
+  }
+  $('#contactsData > tbody').html(html);
 
 }
 
+function deleteContact() {
+  alert("delete clicked!");
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("contactsData").deleteRow(0);
+  // delete from DB
+  // force reload / remove from table
+}
 
+function searchContacts() {
+
+  var search = document.getElementById("Search").value;
+
+  var contactList = document.getElementById("contactList");
+  contactList.innerHTML = "";
+
+
+  var jsonPayload = '{"UserID" : "' + window.name + '", "FirstName" : "' + search + '", "LastName" : "' + "" + '", "PhoneNumber" : "' + "" + '", "Email" : "' + "" + '", "ContactID" : "' + '' + '"}';
+  var url = urlBase + '/SearchContacts';
+
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, false);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try
+  {
+    xhr.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 200)
+      {
+
+        var jsonObject = JSON.parse( xhr.responseText );
+
+        jsonObject = JSON.parse(jsonObject);
+
+        var i;
+        for( i=0; i<jsonObject.length; i++ )
+        {
+          var opt = document.createElement("option");
+          opt.text = jsonObject[i]["FirstName"] + " " +jsonObject[i]["LastName"];
+          opt.value = "";
+          contactList.options.add(opt);
+        }
+      }
+    };
+    xhr.send(jsonPayload);
+  }
+  catch(err)
+  {
+    alert(err);
+  }
 }
