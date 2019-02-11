@@ -167,7 +167,7 @@ function getContacts() {
     html += '<td>'+jsonObject[i]["LastName"]+'</td>';
     html += '<td>'+jsonObject[i]["PhoneNumber"]+'</td>';
     html += '<td>'+jsonObject[i]["Email"]+'</td>';
-    html += '<td><button class="btn btn-primary" onclick="getButtonIndex()">Delete</button></td></tr>';
+    html += '<td><button class="btn btn-primary" id="delButton" onclick="getButtonIndex()">X</button></td></tr>';
     html += '</tr>';
   }
   $('#contactsData > tbody').html(html);

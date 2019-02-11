@@ -7,6 +7,11 @@ body {
 
 }
 
+#delButton{
+	background-color:red;
+	color: black;
+}
+
 .form-inline {
   padding: 10px;
   display:block !important;
