@@ -163,7 +163,6 @@ function getContacts() {
   for(var i in jsonObject)
   {
     html += '<tr id="'+i+'">';
-    html += '<td>'+jsonObject[i]["ContactID"]+'</td>';
     html += '<td>'+jsonObject[i]["FirstName"]+'</td>';
     html += '<td>'+jsonObject[i]["LastName"]+'</td>';
     html += '<td>'+jsonObject[i]["PhoneNumber"]+'</td>';
