@@ -74,6 +74,8 @@ function addContact()
     alert(err);
   }
 
+  getContacts();
+
 }
 
 function createUser() {
@@ -123,7 +125,6 @@ function getContacts() {
   }
   catch(err)
   {
-      document.getElementById("loginResult").innerHTML = err.message;
       alert(err);
   }
 
@@ -131,25 +132,28 @@ function getContacts() {
   var html = '';
   for(var i in jsonObject)
   {
+    var id = jsonObject[i]["ContactID"];
     html += '<tr id="'+i+'">';
     html += '<td>'+jsonObject[i]["ContactID"]+'</td>';
     html += '<td>'+jsonObject[i]["FirstName"]+'</td>';
     html += '<td>'+jsonObject[i]["LastName"]+'</td>';
     html += '<td>'+jsonObject[i]["PhoneNumber"]+'</td>';
     html += '<td>'+jsonObject[i]["Email"]+'</td>';
-    html += '<td><button class="btn btn-primary" onClick="deleteContact()">Delete</button></td></tr>';
+    html += '<td><button class="btn btn-primary" onClick="deleteContact(id)">Delete</button></td></tr>';
     html += '</tr>';
   }
   $('#contactsData > tbody').html(html);
 
 }
 
-function deleteContact() {
-  alert("delete clicked!");
-  var i = r.parentNode.parentNode.rowIndex;
-  document.getElementById("contactsData").deleteRow(0);
+function deleteContact(contactID) {
+  alert(contactID);
+//  confirm("Are you sure?");
+
   // delete from DB
   // force reload / remove from table
+
+  //jsonPayload only needs username and contact id
 }
 
 function searchContacts() {
@@ -163,7 +167,7 @@ function searchContacts() {
   var jsonPayload = '{"UserID" : "' + window.name + '", "FirstName" : "' + search + '", "LastName" : "' + "" + '", "PhoneNumber" : "' + "" + '", "Email" : "' + "" + '", "ContactID" : "' + '' + '"}';
   var url = urlBase + '/SearchContacts';
 
-
+  var jsonObject;
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url, false);
   xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -174,7 +178,7 @@ function searchContacts() {
       if (this.readyState == 4 && this.status == 200)
       {
 
-        var jsonObject = JSON.parse( xhr.responseText );
+        jsonObject = JSON.parse( xhr.responseText );
 
         jsonObject = JSON.parse(jsonObject);
 
@@ -194,4 +198,21 @@ function searchContacts() {
   {
     alert(err);
   }
+
+  $("#contactsData > tbody").html("");
+
+  var html = '';
+  for(var i in jsonObject)
+  {
+    html += '<tr id="'+i+'">';
+    html += '<td>'+jsonObject[i]["ContactID"]+'</td>';
+    html += '<td>'+jsonObject[i]["FirstName"]+'</td>';
+    html += '<td>'+jsonObject[i]["LastName"]+'</td>';
+    html += '<td>'+jsonObject[i]["PhoneNumber"]+'</td>';
+    html += '<td>'+jsonObject[i]["Email"]+'</td>';
+    html += '<td><button class="btn btn-primary" onClick="deleteContact()">Delete</button></td></tr>';
+    html += '</tr>';
+  }
+  $('#contactsData > tbody').html(html);
+
 }
