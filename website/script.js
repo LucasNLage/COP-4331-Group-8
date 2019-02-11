@@ -47,33 +47,64 @@ function doLogin()
 
 }
 
+function validateNumber(number)
+{
+    if(number.toString().length == 10){
+        return true;
+    }else{
+        alert("Invalid phone number");
+        return false;
+    }
+}
+
+function validateEmail(email) 
+{
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(String(email).toLowerCase()))
+    {
+        return true;
+    }else{
+        alert("Invalid email address");
+        return false;
+    }
+}
+
+
 function addContact()
 {
     var newFirstName = document.getElementById("First Name").value;
     var newLastName = document.getElementById("Last Name").value;
     var newPhoneNumber = document.getElementById("Phone Number").value;
     var newEmail = document.getElementById("Email Address").value;
-    var jsonPayload = '{ "UserID" : "' + window.name + '", "FirstName" : "' + newFirstName + '", "LastName" : "' + newLastName + '", "PhoneNumber" : "' + newPhoneNumber + '", "Email" : "' + newEmail + '" }';
-    var url = urlBase + '/SaveContact';
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, false);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     
-    try
-    {
-        xhr.onreadystatechange = function()
+    if(validateNumber(newPhoneNumber) && validateEmail(newEmail))
+    {   
+        var jsonPayload = '{ "UserID" : "' + window.name + '", "FirstName" : "' + newFirstName + '", "LastName" : "' + newLastName + '", "PhoneNumber" : "' + newPhoneNumber + '", "Email" : "' + newEmail + '" }';
+        var url = urlBase + '/SaveContact';
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        
+        try
         {
-            if(this.readyState == 4 && this.status == 200)
+            xhr.onreadystatechange = function()
             {
-                alert("Contact added");
-            }
-        };
-        xhr.send(jsonPayload);
-        getContacts();
-    } catch (err) {
-    alert(err);
-  }
+                if(this.readyState == 4 && this.status == 200)
+                {
+                    alert("Contact added");
+                }
+            };
+            xhr.send(jsonPayload);
+            
+        } catch (err){
+            alert(err);
+        }
 
+        // Clear the add contact user to prepare to add others
+        document.getElementById("signin-form").reset();
+        // Reload the table
+        getContacts();
+    }    
 }
 
 function createUser() {
@@ -146,35 +177,28 @@ function getContacts() {
 
 function getButtonIndex()
 {
-    var ret;    
     $('td').click(function()
     {
         var row_index = $(this).parent().index();
-        ret = row_index;
-        console.log(ret);
-    
-        
+        // console.log(row_index);
+        deleteContact(row_index);
+        return false;        
     });
-    console.log(ret);
-    return ret;
-    // return ret;
-    
-    ret = getButtonIndex();
 }
 
-function deleteContact() {
+function deleteContact(i) {
 
     var jsonPayload = '{"UserID" : "' + window.name + '", "Password" : "' + "" + '"}';
     var url = urlBase + '/GetContacts';
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    var jsonObject;
 
     try
     {
-
         xhr.send(jsonPayload); // sends to server, used for POST requests
-        var jsonObject = JSON.parse(xhr.responseText);
+        jsonObject = JSON.parse(xhr.responseText);
         jsonObject = JSON.parse(jsonObject);
     }
     catch(err)
@@ -184,64 +208,40 @@ function deleteContact() {
   
   if(confirm("Are you sure you want to delete this contact?"))
   {
-    // var i = r.parentNode.parentNode.rowIndex;
-    
-    // var del_FirstName = document.getElementById("First Name").value;
-    
-    var table = document.getElementById("contactsData");
-    var tLength = table.tBodies.length;
-    var tr = document.getElementById("contactsData").rows[tLength].cells.length;
-    
-    var j = "Table height " + (tLength+1) + "\nTable length "  + tr;
-
-
-    // var i = getElementByClass("btn btn-primary").id;
-    var i = getButtonIndex()
-
-    var k = "Button number " + i;
-    /*
+   
+   
+    // Prepare payloard
+    var del_contactID = jsonObject[i]["ContactID"];
     var del_FirstName = jsonObject[i]["FirstName"];
     var del_LastName = jsonObject[i]["LastName"];
     var del_PhoneNumber = jsonObject[i]["PhoneNumber"];
     var del_Email = jsonObject[i]["Email"];
     var s = "Yeet " + del_FirstName + " outta here!";
-    */
-    alert(i);
-   
+    var jsonPayload2 = '{ "UserID" : "' + window.name + '", "FirstName" : "' + del_FirstName + '", "LastName" : "' + del_LastName + '", "PhoneNumber" : "' + del_PhoneNumber + '", "Email" : "' + del_Email + '", "ContactID" : "'  + del_contactID + '" }';
+    alert(s);
     
-    // document.getElementById("contactsData").deleteRow(0);
-
-    // var toBeDeleted ="";
-    // var jsonPayload = '{ "UserID" : "' + window.name + '", "FirstName" : "' + del_FirstName + '", "LastName" : "' + del_LastName + '", "PhoneNumber" : "' + del_PhoneNumber + '", "Email" : "' + del_Email + '" }';
-    /*
-    var url = urlBase + '/DeleteContact';
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, false);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    // Send payload
+    var url2 = urlBase + '/DeleteContact';
+    var xhr2 = new XMLHttpRequest();
+    xhr2.open("DELETE", url2, false);
+    xhr2.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try
     {
 
-      xhr.send(jsonPayload); // sends to server, used for POST requests
-
-      var jsonObject = JSON.parse(xhr.responseText);
-      jsonObject = JSON.parse(jsonObject);
+      xhr2.send(jsonPayload2); 
 
     }
     catch(err)
     {
-      // document.getElementById("loginResult").innerHTML = err.message;
       alert(err);
     }
-    */
-    // delete from DB
-    // remove from table
+    
+    
     // force reload 
     getContacts();
+
   }
-  // alert("delete clicked!");
-  
-  
 }
 
 function searchContacts() {
