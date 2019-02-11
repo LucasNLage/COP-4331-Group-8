@@ -218,7 +218,7 @@ function deleteContact(i) {
     var del_Email = jsonObject[i]["Email"];
     var s = "Yeet " + del_FirstName + " outta here!";
     var jsonPayload2 = '{ "UserID" : "' + window.name + '", "FirstName" : "' + del_FirstName + '", "LastName" : "' + del_LastName + '", "PhoneNumber" : "' + del_PhoneNumber + '", "Email" : "' + del_Email + '", "ContactID" : "'  + del_contactID + '" }';
-    alert(s);
+    console.log(s);
     
     // Send payload
     var url2 = urlBase + '/DeleteContact';
