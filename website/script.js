@@ -287,3 +287,15 @@ function searchContacts() {
     alert(err);
   }
 }
+
+function filterRows()
+{
+ $(document).ready(function(){
+   $("#searchBox").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#contactsData tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  }); 
+}
