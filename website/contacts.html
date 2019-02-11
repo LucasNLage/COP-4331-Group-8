@@ -16,9 +16,7 @@
   <div id="search">
     <form class="form-inline" role="form">
       <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
-      <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-    <button type="button" class="btn btn-primary mb-2" onClick="searchContacts()">Submit</button>
-    <select id="contactList"></select>
+      <input type="text" class="form-control mb-2 mr-sm-2" id="searchBox" placeholder="Search" onkeypress="filterRows()">
     </form>
   </div>
 </div>
@@ -67,23 +65,5 @@
 </div>
 </div> <!--End containter-->
 
-<script>
-  var table = document.getElementById("contactsData"),rIndex,cIndex;
-    for(var i = 0; i < table.rows.length; i++)
-    {
-        for(var j = 0; j < table.rows[i].cells.length; j++)
-        {
-            table.rows[i].cells[j].onclick = function()
-            {
-                rIndex = this.parentElement.rowIndex;
-                cIndex = this.cellIndex;
-                console.log(rIndex);
-            };
-        }
-    }
-</script>
-
 </body>
-
-
 </html>
