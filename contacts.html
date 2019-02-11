@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contacts</title>
+    <link href="contacts.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
+    <link href="../bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src='script.js'></script>
+
+</head>
+<body>
+<div id="container">
+<div class="input-group-prepend">
+  <div id="search">
+    <form class="form-inline" role="form">
+      <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
+      <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
+    <button type="button" class="btn btn-primary mb-2" onClick="searchContacts()">Submit</button>
+    <select id="contactList"></select>
+    </form>
+  </div>
+</div>
+<!--
+<table class="table">
+    <tr>
+        <td><input type="text" id="First Name"  placeholder="First Name">
+        <input type="text" id="Last Name"  placeholder="Last Name">
+        <input type="text" id="Phone Number"  placeholder="Phone Number">
+        <input type="text" id="Email Address"  placeholder="Email Address">
+        <input type="button" id="add" value="Add" onclick="Javascript:addRow()"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+-->
+<form class="form-signin">
+<div class="form-group">
+  <label for = "Credentials">Credentials</label>
+  <input type="text" class="form-control" id="First Name" placeholder="First Name" name="First Name">
+</div>
+<div class="form-group">
+  <input type="text" class="form-control" id="Last Name" placeholder="Last Name" name="Last Name">
+</div>
+<div class="form-group">
+  <input type="text" class="form-control" id="Phone Number" placeholder="Phone Number" name="Phone Number">
+</div>
+<div class="form-group">
+  <input type="text" class="form-control" id="Email Address" placeholder="Email Address" name="Email Address">
+</div>
+
+
+<!--<button type="submit" class="btn btn-primary" id="add" value="Add" onclick="Javascript:addRow()">Submit</button>-->
+<button type="button" class="btn btn-primary" id="add" value="Add" onclick="addContact()">Submit</button>
+</form>
+<div id="contacts">
+<b>Your contacts:</b>
+<table class="table" id="contactsData"  border="1" >
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Email Address</th>
+        <th>Delete?</th>
+    </tr>
+  </thead>
+  <tbody id = "tbodyid">
+
+  </tbody>
+</table>
+&nbsp;<br/>
+</div>
+<button type="button" class="btn btn-primary" id="View" value="View" onclick="getContacts()">View Contacts</button>
+<div id="div1">
+</div>
+</div> <!--End containter-->
+</body>
+
+</html>
