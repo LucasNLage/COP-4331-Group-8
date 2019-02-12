@@ -7,6 +7,23 @@ body {
 
 }
 
+#delButton{
+	border: 2px;
+	background-color:grey;
+	color: white;
+}
+
+#delButton:hover {
+  background-color: #575656;
+}
+
+#contactsData{
+	text-align:center;
+  width: 100em;
+  margin: 0 auto;
+  margin-top: 5em;
+}
+
 .form-inline {
   padding: 10px;
   display:block !important;
@@ -15,4 +32,27 @@ body {
 
 .form-group {
   bottom:auto;
+}
+
+#add{
+	background-color: grey;
+	borded: 2px;
+}
+
+tr:nth-child(even) {
+  background-color: #d3d3d3;
+}
+
+#thead{
+  background-color: #7CB9B1;
+}
+
+#logout {
+  width = 10%;
+  background-color: #7CB9B1;
+  border-color: #7CB9B1;
+}
+
+#logout:hover {
+  background-color: #5ba8a5;
 }

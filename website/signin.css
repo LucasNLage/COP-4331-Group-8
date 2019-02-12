@@ -38,3 +38,21 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+#loginBtn {
+  background-color: #7CB9B1;
+  border-color: #7CB9B1;
+}
+
+#loginBtn:hover {
+  background-color: #5ba8a5;
+}
+
+#firstTime {
+  background-color: #7CB9B1;
+  border-color: #7CB9B1;
+}
+
+#firstTime:hover {
+  background-color: #5ba8a5;
+}
