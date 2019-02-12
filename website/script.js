@@ -26,8 +26,8 @@ function doLogin()
 
          if(jsonObject == null)
          {
-             document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
-             alert("login failed");
+             // document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+             alert("User/Password combination incorrect. Try again");
              return;
          } else {
             window.name = login;
@@ -41,7 +41,7 @@ function doLogin()
     }
     catch(err)
     {
-        document.getElementById("loginResult").innerHTML = err.message;
+        // document.getElementById("loginResult").innerHTML = err.message;
         alert(err);
     }
 
@@ -165,13 +165,12 @@ function getContacts() {
     html += '<tr id="'+i+'">';
     html += '<td>'+jsonObject[i]["FirstName"]+'</td>';
     html += '<td>'+jsonObject[i]["LastName"]+'</td>';
-    html += '<td>'+jsonObject[i]["PhoneNumber"]+'</td>';
+    html += '<td>'+formatPhoneNumber(+jsonObject[i]["PhoneNumber"])+'</td>';
     html += '<td>'+jsonObject[i]["Email"]+'</td>';
     html += '<td><button class="btn btn-primary" id="delButton" onclick="getButtonIndex()">X</button></td></tr>';
     html += '</tr>';
   }
   $('#contactsData > tbody').html(html);
-
 }
 
 function getButtonIndex()
@@ -289,6 +288,7 @@ function searchContacts() {
 
 function filterRows()
 {
+
  $(document).ready(function(){
    $("#searchBox").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -297,4 +297,16 @@ function filterRows()
       });
     });
   }); 
+
+ 
+
+}
+
+function formatPhoneNumber(phoneNumberString) {
+  var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+  var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+  if (match) {
+    return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+  }
+  return null
 }
