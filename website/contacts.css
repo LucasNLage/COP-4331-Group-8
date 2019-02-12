@@ -8,8 +8,13 @@ body {
 }
 
 #delButton{
-	background-color:red;
-	color: black;
+	border: 2px;
+	background-color:grey;
+	color: white;
+}
+
+#contactsData{
+	text-align:center;
 }
 
 .form-inline {
@@ -20,4 +25,9 @@ body {
 
 .form-group {
   bottom:auto;
+}
+
+#add{
+	background-color: grey;
+	borded: 2px;
 }
